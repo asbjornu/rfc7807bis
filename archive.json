@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-08-31T01:01:13.272159+00:00",
+  "timestamp": "2021-09-02T01:01:03.097351+00:00",
   "repo": "ietf-wg-httpapi/rfc7807bis",
   "labels": [
     {
@@ -979,7 +979,7 @@
       "labels": [],
       "body": "_Pulling this conversation out of #11:_\r\n\r\nIt's clear that there's demand for error codes scoped to the API, without creating documentation pages for each code and linking to them in the `type` field. There are many ways that implementers could do this, from linking to non-existent URLs to URNs to tags URIs, etc.\r\n\r\nIt would be useful if the specification included examples of this, and made a clear recommendation for this case.",
       "createdAt": "2021-02-11T15:32:05Z",
-      "updatedAt": "2021-08-30T14:48:11Z",
+      "updatedAt": "2021-09-01T07:11:55Z",
       "closedAt": null,
       "comments": [
         {
@@ -988,6 +988,55 @@
           "body": "We (well, mostly @mnot) have made some good progress on the other issues raised out of #11 but we haven't looked at this one yet.\r\n\r\nAs strawman to get this moving, how about: we register a `problem` URN namespace id, and we recommend that non-dereferenceable URIs should be URNs using that, namespaced with an appropriate domain and raw type id, for example: `urn:problem:example.com:out-of-credit`.\r\n\r\nWould that work? It would give us a clear solution to recommend, which is explicit but easy to read, with minimal extra complexity or overhead for implementers (imo).\r\n\r\nI don't have examples, but I suspect there are other standards elsewhere that would appreciate having a problem id namespace for URNs as well.\r\n\r\nI don't love using a domain for namespacing a non-locator, but I _think_ some namespacing is preferable, and I'm not sure what other namespaces would be suitable. Alternatives very welcome :smile:",
           "createdAt": "2021-08-30T14:48:11Z",
           "updatedAt": "2021-08-30T14:48:11Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We penciled in the URI prefix for registered types as \"https://iana.org/assignments/http-problem-types#\" in #7, but that was not finalised.\r\n\r\nI think registering one or more problems as exemplars is a good path forward for this and other issues (e.g., as discussed in #6). We need to be very careful to set a good example in them, which means we need good candidates; I'm thinking 'JSON Validation Error' and 'XML Validation Error' might be appropriate (perhaps along with corresponding wellformedness errors).\r\n\r\nIf we choose a urn, I suspect there will be considerable pressure to use `urn:ietf:params:http:problem:` or something similar, as per [RFC3553](https://www.rfc-editor.org/rfc/rfc3553.html).",
+          "createdAt": "2021-08-31T02:40:42Z",
+          "updatedAt": "2021-08-31T02:40:42Z"
+        },
+        {
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On 2021-08-31 04:40, Mark Nottingham wrote:\n> If we choose a urn, I suspect there will be considerable pressure to use \n> |urn:ietf:params:http:problem:| or something similar, as per RFC3553 \n> <https://www.rfc-editor.org/rfc/rfc3553.html>.\n\nmy understanding of the \"urn:ietf:params\" namespace is that it is meant \nto be used for parameters managed/defined by IETF specs.\n\ni think the original's suggestion intent was to have a \"safe prefix\" for \na namespace which then would be \"unmanaged\" with some conventions around \nthat, such as using domains names.\n\ni think the idea of giving examples (and even a suggested namespace \nalong with conventions for using it) is a good one. that way we can \nclearly support both scenarios:\n\n- if you're planning on making documentation available, use a resolvable \nURI but keep in mind that this best should be managed in a way so that \nit works for a good number of years.\n\n- if you're planning on just identifying problem types, use a \nnon-resolvable URI, and here's a recipe for doing it.\n",
+          "createdAt": "2021-08-31T07:48:45Z",
+          "updatedAt": "2021-08-31T07:48:45Z"
+        },
+        {
+          "author": "pimterry",
+          "authorAssociation": "NONE",
+          "body": "> i think the original's suggestion intent was to have a \"safe prefix\" for a namespace which then would be \"unmanaged\" with some conventions around that, such as using domains names.\r\n\r\n> - if you're planning on making documentation available, use a resolvable URI but keep in mind that this best should be managed in a way so that it works for a good number of years.\r\n> - if you're planning on just identifying problem types, use a non-resolvable URI, and here's a recipe for doing it.\r\n\r\n:+1: exactly\r\n\r\nI think #7 is relevant in that it would be helpful to everybody if we can follow our own recommendations in our own problem id registry, but it's otherwise independent.",
+          "createdAt": "2021-08-31T07:52:07Z",
+          "updatedAt": "2021-08-31T07:52:07Z"
+        },
+        {
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On 2021-08-31 09:52, Tim Perry wrote:\n> I think #7 <https://github.com/ietf-wg-httpapi/rfc7807bis/issues/7> is \n> relevant in that it would be helpful to everybody if we can follow our \n> own recommendations in our own problem id registry, but it's otherwise \n> independent.\n\nthe difficulty may be that IETF *has* an institutional approach for \nmanaging parameters (urn:ietf:params:http-problems mentioned by @mnot \nabove), whereas most orgs minting problem types probably won't have one \nand won't create one. which may lead to us to saying three things about \nwhat kind of URI to use:\n\n- check out common problem types registered under \nurn:ietf:params:http-problems and consider reusing one if it fits.\n- use URIs when creating dereferencable problem type identifiers.\n- when using non-dereferencable problem type identifiers be clear about \nthat by using non-dereferencable URIs, and here's an URN-based recipe \nhow to do that.\n",
+          "createdAt": "2021-08-31T08:20:43Z",
+          "updatedAt": "2021-08-31T08:20:43Z"
+        },
+        {
+          "author": "pimterry",
+          "authorAssociation": "NONE",
+          "body": "> the difficulty may be that IETF *has* an institutional approach for managing parameters (urn:ietf:params:http-problems mentioned by @mnot above), whereas most orgs minting problem types probably won't have one and won't create one. which may lead to us to saying three things about what kind of URI to use:\r\n>  - check out common problem types registered under urn:ietf:params:http-problems and consider reusing one if it fits.\r\n> - use URIs when creating dereferencable problem type identifiers.\r\n> - when using non-dereferencable problem type identifiers be clear about that by using non-dereferencable URIs, and here's an URN-based recipe how to do that.\r\n\r\nAh, I see, ok. Yes, that makes sense, and given that the 3 part recommendation seems reasonable to me. ",
+          "createdAt": "2021-08-31T10:43:18Z",
+          "updatedAt": "2021-08-31T10:43:18Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> my understanding of the \"urn:ietf:params\" namespace is that it is meant\r\nto be used for parameters managed/defined by IETF specs.\r\n\r\nNo, it's for parameter name spaces managed by IETF documents -- which this would be.\r\n\r\nWe could also give an example that uses a `tag` URI.",
+          "createdAt": "2021-09-01T01:36:56Z",
+          "updatedAt": "2021-09-01T01:36:56Z"
+        },
+        {
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On 2021-09-01 03:37, Mark Nottingham wrote:\n>     my understanding of the \"urn:ietf:params\" namespace is that it is meant\n>     to be used for parameters managed/defined by IETF specs.\n> \n> No, it's for parameter name spaces managed by IETF documents -- which \n> this would be.\n\nthat's what i wanted to say. so these URIs/examples would just cover the \ncommon problem types that would be managed by the spec.\n\n> We could also give an example that uses a |tag| URI.\n\nwhich then would be for those other types that people/orgs are minting \nand where they say these are not resolvable, right? i think for those \nterry proposed a URN namespace instead of tag URIs, but either way it \nsimply would help to state the use case (\"your own types, not intended \nto be resolvable\") and provide a recipe (\"here's one way to do it\").\n\nthe main point seems to be: the spec should mention both \"common types\" \nwhich may even get a registry, and \"private types\" which probably are \nusing a different namespace, and we could suggest one pattern for doing \nthat.\n",
+          "createdAt": "2021-09-01T07:11:55Z",
+          "updatedAt": "2021-09-01T07:11:55Z"
         }
       ]
     },
@@ -2269,6 +2318,42 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 27,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzI0NTU5Njgw",
+      "title": "fix broken link into [SEMANTICS]",
+      "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/pull/27",
+      "state": "MERGED",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2021-09-01T14:32:03Z",
+      "updatedAt": "2021-09-01T23:16:32Z",
+      "baseRepository": "ietf-wg-httpapi/rfc7807bis",
+      "baseRefName": "main",
+      "baseRefOid": "b7fa43ea9a083057bc5d6dff9810df4ea0c05eb2",
+      "headRepository": "reschke/rfc7807bis",
+      "headRefName": "patch-2",
+      "headRefOid": "7c44f9118d69450d4834da6d7ef3b4ab11626e13",
+      "closedAt": "2021-09-01T23:16:27Z",
+      "mergedAt": "2021-09-01T23:16:27Z",
+      "mergedBy": "mnot",
+      "mergeCommit": {
+        "oid": "16e596bef33378566dc1019bdc2f6d30d5733483"
+      },
+      "comments": [
+        {
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you.",
+          "createdAt": "2021-09-01T23:16:32Z",
+          "updatedAt": "2021-09-01T23:16:32Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
