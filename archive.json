@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-02T01:01:03.097351+00:00",
+  "timestamp": "2021-09-07T00:59:11.816296+00:00",
   "repo": "ietf-wg-httpapi/rfc7807bis",
   "labels": [
     {
@@ -152,7 +152,7 @@
       "labels": [],
       "body": "Sometimes an API will want to report more than one problem in a response. 7807 explains that this can be done in extensions, but does not natively allow multiple problems to be conveyed, because there was concern that doing so would make it too easy to contradict the semantics of the status code.\r\n\r\nSince publication, developers have still wanted a generic solution to this. A few possible directions we could go on:\r\n\r\n0. Do nothing\r\n1. Improve the documentation regarding how to handle multiple problems in extensions\r\n2. Introduce a way to natively convey multiple problems, as long as they share the same status code semantics\r\n3. Something else?",
       "createdAt": "2021-01-28T23:41:07Z",
-      "updatedAt": "2021-07-29T07:28:39Z",
+      "updatedAt": "2021-09-06T20:24:32Z",
       "closedAt": null,
       "comments": [
         {
@@ -273,6 +273,13 @@
           "body": "Also, since we now have a registry, we could go ahead and **define** a problem type that handles multiple instances -- for example, 'json input validation error'. That might help tease out some of the issues here.",
           "createdAt": "2021-07-29T07:28:39Z",
           "updatedAt": "2021-07-29T07:28:39Z"
+        },
+        {
+          "author": "FusionFabricUser",
+          "authorAssociation": "NONE",
+          "body": "here is the model followed @Finastra \r\nhttps://fusionfabric.github.io/open-api-standard/Responses_and_Errors.html#finastra-error-message-standards \r\n\r\nwe are using a fields causes that is defined as an array of object. use case is  that for a given failure like a transaction several causes can be implied (ie first field not correct size, second not a number etc  )\r\n\r\n\r\nkey design decision would be is this a single object so cause , or an array of object \r\n\r\nnotice that the cause has been also introduce by Zalando \r\nhttps://github.com/zalando/problem that has been integrated  with a Spring extension",
+          "createdAt": "2021-09-06T20:24:32Z",
+          "updatedAt": "2021-09-06T20:24:32Z"
         }
       ]
     },
