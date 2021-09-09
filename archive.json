@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-07T00:59:11.816296+00:00",
+  "timestamp": "2021-09-09T01:04:21.625999+00:00",
   "repo": "ietf-wg-httpapi/rfc7807bis",
   "labels": [
     {
@@ -1097,7 +1097,7 @@
       "id": "MDU6SXNzdWU4MDY1MDcyNDk=",
       "title": "Provide an indication of whether a type URL is designed to be dereferenced for documentation",
       "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/issues/15",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pimterry",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1106,8 +1106,8 @@
       "labels": [],
       "body": "_Pulling this conversation out of #11:_\r\n\r\n* The current spec allows any type URLs to be used, and there's no strong requirement that they link to documentation, it's just encouraged.\r\n* As an API client, it can be useful to be able to automatically find human-readable documentation relevant to an error response.\r\n* Right now, the only way to do that is to dereference every type URL to see if it goes to a documentation resource, but a) that's discouraged by the spec (type URIs should not be dereferenced automatically) and b) it's not very efficient for anybody involved.\r\n\r\nAs an example, Zolando's [API design guidelines](https://opensource.zalando.com/restful-api-guidelines/#176) specify that:\r\n\r\n> Problem type and instance identifiers in our APIs are not meant to be resolved. RFC 7807 encourages that custom problem types are URI references that point to human-readable documentation, but we deliberately decided against that, as all important parts of the API must be documented using OpenAPI anyway. In addition, URLs tend to be fragile and not very stable over longer periods because of organizational and documentation changes and descriptions might easily get out of sync.\r\n\r\nAll their API responses use absolute path types to deal with this, like `\"type\": \"/problems/out-of-stock\"`, which intentionally go nowhere. This is allowed by our current spec, but makes life difficult for those of us who want to automatically find documentation from arbitrary problem detail responses.\r\n\r\nIt would be useful to provide an explicit way to link to documentation in these cases, or to make it clear that no documentation is available.",
       "createdAt": "2021-02-11T15:40:24Z",
-      "updatedAt": "2021-08-27T03:30:13Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-08T05:06:48Z",
+      "closedAt": "2021-09-08T05:06:48Z",
       "comments": [
         {
           "author": "serialseb",
@@ -1344,15 +1344,15 @@
       "id": "MDU6SXNzdWU5NzU0MTU3NDg=",
       "title": "Cardinality of problem details object members",
       "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/issues/25",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tdonker",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "When reading:\r\n\r\nhttps://ietf-wg-httpapi.github.io/rfc7807bis/draft-ietf-httpapi-rfc7807bis.html\r\n\r\nit's not entrirely clear which member field of the problem details object (type, status, title, detail, instance) is mandatory and which is optional. Is it correct to state that only the 'type' member is mandatory and all others are optional?",
       "createdAt": "2021-08-20T09:05:05Z",
-      "updatedAt": "2021-08-27T03:31:36Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-08T05:06:06Z",
+      "closedAt": "2021-09-08T05:06:06Z",
       "comments": [
         {
           "author": "sazzer",
@@ -2270,24 +2270,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzIwOTk4NzI5",
       "title": "Recommendations about dereferenceability of type",
       "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/pull/26",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mnot",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #15",
       "createdAt": "2021-08-27T03:29:54Z",
-      "updatedAt": "2021-08-30T14:34:15Z",
+      "updatedAt": "2021-09-08T05:06:48Z",
       "baseRepository": "ietf-wg-httpapi/rfc7807bis",
       "baseRefName": "main",
       "baseRefOid": "b7fa43ea9a083057bc5d6dff9810df4ea0c05eb2",
       "headRepository": "ietf-wg-httpapi/rfc7807bis",
       "headRefName": "mnot-15",
       "headRefOid": "66236119b0f1b58a1cefbb911f5e4a2e45a27a34",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-08T05:06:48Z",
+      "mergedAt": "2021-09-08T05:06:47Z",
+      "mergedBy": "mnot",
+      "mergeCommit": {
+        "oid": "3511e0d2d6d2198adf8094d83866409edd5f91e4"
+      },
       "comments": [
         {
           "author": "andrecedik",
