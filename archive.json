@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-09T01:04:21.625999+00:00",
+  "timestamp": "2021-09-19T01:03:13.989839+00:00",
   "repo": "ietf-wg-httpapi/rfc7807bis",
   "labels": [
     {
@@ -2363,6 +2363,86 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOE-NsGs4r3q35",
+      "title": "Explain how type errors for members are handled.  ",
+      "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/pull/28",
+      "state": "OPEN",
+      "author": "mnot",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #19.",
+      "createdAt": "2021-09-17T03:11:04Z",
+      "updatedAt": "2021-09-17T13:12:52Z",
+      "baseRepository": "ietf-wg-httpapi/rfc7807bis",
+      "baseRefName": "main",
+      "baseRefOid": "3511e0d2d6d2198adf8094d83866409edd5f91e4",
+      "headRepository": "ietf-wg-httpapi/rfc7807bis",
+      "headRefName": "mnot/issue19",
+      "headRefOid": "62c6a46613f3c1e076174a0418ca300297ad344c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOE-NsGs4tJbi0",
+          "commit": {
+            "abbreviatedOid": "62c6a46"
+          },
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "\"does not match that specified\" -> \"does not match the specified type\"",
+          "createdAt": "2021-09-17T13:12:52Z",
+          "updatedAt": "2021-09-17T13:12:52Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOE-NsGs4r3sk4",
+      "title": "Talk about non-resolveable type URIs",
+      "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/pull/29",
+      "state": "OPEN",
+      "author": "mnot",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #13",
+      "createdAt": "2021-09-17T03:28:29Z",
+      "updatedAt": "2021-09-17T13:11:20Z",
+      "baseRepository": "ietf-wg-httpapi/rfc7807bis",
+      "baseRefName": "main",
+      "baseRefOid": "b9f1720d4a81b8c9573aed231f3b02b09671cdbd",
+      "headRepository": "ietf-wg-httpapi/rfc7807bis",
+      "headRefName": "mnot/issue13",
+      "headRefOid": "afcc74cb38a7dc62f2667da1ab1105105c313a2f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOE-NsGs4tJbKg",
+          "commit": {
+            "abbreviatedOid": "afcc74c"
+          },
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "looks good to me. maybe change\r\n\r\n\"taking advantage of that function would require using a different URI, causing clients to break if additional transition work is not performed.\"\r\n\r\nto\r\n\r\n\"taking advantage of that capability would require switching to a resolvable URI, thereby creating a new identity for the problem type and thus introducing a breaking change.\"",
+          "createdAt": "2021-09-17T13:11:20Z",
+          "updatedAt": "2021-09-17T13:11:20Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
