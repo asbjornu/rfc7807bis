@@ -6,8 +6,8 @@ HTTPAPI                                                    M. Nottingham
 Internet-Draft                                                          
 Obsoletes: 7807 (if approved)                                   E. Wilde
 Intended status: Standards Track                                        
-Expires: 25 March 2022                                          S. Dalal
-                                                       21 September 2021
+Expires: 27 March 2022                                          S. Dalal
+                                                       23 September 2021
 
 
                      Problem Details for HTTP APIs
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 March 2022.
+   This Internet-Draft will expire on 27 March 2022.
 
 Copyright Notice
 
@@ -246,6 +246,19 @@ Table of Contents
    result, it is RECOMMENDED that absolute URIs be used in "type" when
    possible, and that when relative URIs are used, they include the full
    path (e.g., "/types/123").
+
+   The type URI can also be a non-resolvable URI.  For example, the tag
+   URI scheme [RFC4151] can be used to uniquely identify problem types:
+
+   tag:mnot@mnot.net,2021-09-17:OutOfLuck
+
+   Non-resolvable URIs ought not be used when there is some future
+   possibility that it might become desireable to do so.  For example,
+   if the URI above were used in an API and later a tool was adopted
+   that resolves type URIs to discover information about the error,
+   taking advantage of that capability would require switching to a
+   resolvable URI, thereby creating a new identity for the problem type
+   and thus introducing a breaking change.
 
 3.1.2.  "status"
 
@@ -576,6 +589,10 @@ Table of Contents
               Core 1.1 - Third Edition", World Wide Web Consortium
               Recommendation REC-rdfa-core-20150317, 17 March 2015,
               <https://www.w3.org/TR/2015/REC-rdfa-core-20150317>.
+
+   [RFC4151]  Kindberg, T. and S. Hawke, "The 'tag' URI Scheme",
+              RFC 4151, DOI 10.17487/RFC4151, October 2005,
+              <https://datatracker.ietf.org/doc/html/rfc4151>.
 
    [RFC4918]  Dusseault, L., Ed., "HTTP Extensions for Web Distributed
               Authoring and Versioning (WebDAV)", RFC 4918,
