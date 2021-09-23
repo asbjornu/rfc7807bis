@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-19T01:03:13.989839+00:00",
+  "timestamp": "2021-09-23T01:06:43.995244+00:00",
   "repo": "ietf-wg-httpapi/rfc7807bis",
   "labels": [
     {
@@ -1266,7 +1266,7 @@
       "id": "MDU6SXNzdWU4NjcyMjExMjA=",
       "title": "Handling invalid problem objects",
       "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/issues/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mnot",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1275,8 +1275,8 @@
       "labels": [],
       "body": "From https://www.rfc-editor.org/errata/eid5515 :\r\n\r\nJSON objects with a null \"type\" are syntactically correct, but there is no information on how it should be handled.\r\n\r\n{\r\n\"type\": null,\r\n\"status\": 404,\r\n\"title\": \"Not Found\"\r\n}\r\n\r\nIt makes sense to treat null as an alias of \"about:blank\" and that's how I think it should be documented.",
       "createdAt": "2021-04-26T03:30:48Z",
-      "updatedAt": "2021-05-25T06:59:32Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-21T07:42:26Z",
+      "closedAt": "2021-09-21T07:42:26Z",
       "comments": [
         {
           "author": "mnot",
@@ -2369,24 +2369,26 @@
       "id": "PR_kwDOE-NsGs4r3q35",
       "title": "Explain how type errors for members are handled.  ",
       "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/pull/28",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mnot",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #19.",
       "createdAt": "2021-09-17T03:11:04Z",
-      "updatedAt": "2021-09-17T13:12:52Z",
+      "updatedAt": "2021-09-21T07:42:27Z",
       "baseRepository": "ietf-wg-httpapi/rfc7807bis",
       "baseRefName": "main",
       "baseRefOid": "3511e0d2d6d2198adf8094d83866409edd5f91e4",
       "headRepository": "ietf-wg-httpapi/rfc7807bis",
       "headRefName": "mnot/issue19",
-      "headRefOid": "62c6a46613f3c1e076174a0418ca300297ad344c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "ac5cf4907e6144f6fd365c19a0153266beafabfa",
+      "closedAt": "2021-09-21T07:42:26Z",
+      "mergedAt": "2021-09-21T07:42:26Z",
+      "mergedBy": "mnot",
+      "mergeCommit": {
+        "oid": "8f5baecb919512ca877edecb1e334123fde9f52b"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2400,6 +2402,39 @@
           "body": "\"does not match that specified\" -> \"does not match the specified type\"",
           "createdAt": "2021-09-17T13:12:52Z",
           "updatedAt": "2021-09-17T13:12:52Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4tQ12F",
+          "commit": {
+            "abbreviatedOid": "62c6a46"
+          },
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-21T07:26:04Z",
+          "updatedAt": "2021-09-21T07:26:05Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nProblem detail objects can have the following members. If the type of a member's value does not match the specified type, the member MUST be ignored -- i.e., processing will continue as if the member had not been present.\r\n```",
+              "createdAt": "2021-09-21T07:26:05Z",
+              "updatedAt": "2021-09-21T07:26:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4tQ5D0",
+          "commit": {
+            "abbreviatedOid": "ac5cf49"
+          },
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-21T07:40:28Z",
+          "updatedAt": "2021-09-21T07:40:28Z",
           "comments": []
         }
       ]
@@ -2416,13 +2451,13 @@
       "labels": [],
       "body": "Fixes #13",
       "createdAt": "2021-09-17T03:28:29Z",
-      "updatedAt": "2021-09-17T13:11:20Z",
+      "updatedAt": "2021-09-23T01:06:29Z",
       "baseRepository": "ietf-wg-httpapi/rfc7807bis",
       "baseRefName": "main",
       "baseRefOid": "b9f1720d4a81b8c9573aed231f3b02b09671cdbd",
       "headRepository": "ietf-wg-httpapi/rfc7807bis",
       "headRefName": "mnot/issue13",
-      "headRefOid": "afcc74cb38a7dc62f2667da1ab1105105c313a2f",
+      "headRefOid": "c8df441fe7a84d3c88c1aff9bc66fcc59505eb65",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2441,6 +2476,26 @@
           "createdAt": "2021-09-17T13:11:20Z",
           "updatedAt": "2021-09-17T13:11:20Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4tY-5Q",
+          "commit": {
+            "abbreviatedOid": "afcc74c"
+          },
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-23T01:06:22Z",
+          "updatedAt": "2021-09-23T01:06:23Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nNon-resolvable URIs ought not be used when there is some future possibility that it might become desireable to do so. For example, if the URI above were used in an API and later a tool was adopted that resolves type URIs to discover information about the error, taking advantage of that capability would require switching to a resolvable URI, thereby creating a new identity for the problem type and thus introducing a breaking change.\r\n```",
+              "createdAt": "2021-09-23T01:06:22Z",
+              "updatedAt": "2021-09-23T01:06:23Z"
+            }
+          ]
         }
       ]
     }
