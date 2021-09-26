@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-23T01:06:43.995244+00:00",
+  "timestamp": "2021-09-26T01:04:32.396708+00:00",
   "repo": "ietf-wg-httpapi/rfc7807bis",
   "labels": [
     {
@@ -977,7 +977,7 @@
       "id": "MDU6SXNzdWU4MDY1MDAwODE=",
       "title": "Make a clear recommendation for the 'type' to use when not linking to a documentation URL",
       "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/issues/13",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pimterry",
       "authorAssociation": "NONE",
       "assignees": [
@@ -986,8 +986,8 @@
       "labels": [],
       "body": "_Pulling this conversation out of #11:_\r\n\r\nIt's clear that there's demand for error codes scoped to the API, without creating documentation pages for each code and linking to them in the `type` field. There are many ways that implementers could do this, from linking to non-existent URLs to URNs to tags URIs, etc.\r\n\r\nIt would be useful if the specification included examples of this, and made a clear recommendation for this case.",
       "createdAt": "2021-02-11T15:32:05Z",
-      "updatedAt": "2021-09-01T07:11:55Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-23T23:43:51Z",
+      "closedAt": "2021-09-23T23:43:51Z",
       "comments": [
         {
           "author": "pimterry",
@@ -2132,21 +2132,21 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NjY2NzU0NDkz",
       "title": "adding processing model (closing #19)",
       "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/pull/23",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dret",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "making it clear that members using the wrong type must be ignored.",
       "createdAt": "2021-06-10T10:32:24Z",
-      "updatedAt": "2021-06-16T00:49:48Z",
+      "updatedAt": "2021-09-23T01:07:37Z",
       "baseRepository": "ietf-wg-httpapi/rfc7807bis",
       "baseRefName": "main",
       "baseRefOid": "2b0d06306d9de017088e04b12e9321397b6a59f9",
       "headRepository": "ietf-wg-httpapi/rfc7807bis",
       "headRefName": "dret-patch-2",
       "headRefOid": "aaba2eba8aaefca0a2e54f02a985c7f3c3848887",
-      "closedAt": null,
+      "closedAt": "2021-09-23T01:07:36Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -2164,6 +2164,13 @@
           "body": "On 2021-06-11 04:43, Mark Nottingham wrote:\n>   * Generally, MUST is used to specify interoperability requirements;\n>     they should be testable. These MUSTs read oddly in that light.\n\nwouldn't the test simply be whether the member values conform to the \ntype given in the definition or not? if they don't, interop suffers \nbecause consumers don't know how to interpret the invalid type.\n\n>   * This isn't so much a processing model as it does specify error\n>     handling. Processing models generally specify behaviours; this\n>     doesn't (and arguably, this spec can't; that's up to the application\n>     in question)\n\nok. to me, the first line of defense in behavior is to do this kind of \nvalidation. validate, then proceed. the original issue was asking what \nto do when validation fails.\n\n>   * In the case that a problem type defines that a particular extension\n>     member MUST be present and valid, what happens?\n\ni forgot that this is even possible. wouldn't that up for the type to \ndefine? that's hard for the generic spec to do. but i agree that saying \nthis in the new section probably would help.\n\n> So, I'd just say something like: \"When interpreting problem details, \n> errors (such as an an extension member whose value type is unexpected) \n> might be encountered. In most situations, the information in other valid \n> parts of the problem details can still be relied upon.\"\n\nthanks, i tweaked that a little and updated the PR.\n",
           "createdAt": "2021-06-11T14:55:03Z",
           "updatedAt": "2021-06-11T14:55:03Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "body": "OBE",
+          "createdAt": "2021-09-23T01:07:36Z",
+          "updatedAt": "2021-09-23T01:07:36Z"
         }
       ],
       "reviews": [
@@ -2444,25 +2451,35 @@
       "id": "PR_kwDOE-NsGs4r3sk4",
       "title": "Talk about non-resolveable type URIs",
       "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/pull/29",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mnot",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #13",
       "createdAt": "2021-09-17T03:28:29Z",
-      "updatedAt": "2021-09-23T01:06:29Z",
+      "updatedAt": "2021-09-23T23:43:51Z",
       "baseRepository": "ietf-wg-httpapi/rfc7807bis",
       "baseRefName": "main",
       "baseRefOid": "b9f1720d4a81b8c9573aed231f3b02b09671cdbd",
       "headRepository": "ietf-wg-httpapi/rfc7807bis",
       "headRefName": "mnot/issue13",
       "headRefOid": "c8df441fe7a84d3c88c1aff9bc66fcc59505eb65",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2021-09-23T23:43:51Z",
+      "mergedAt": "2021-09-23T23:43:50Z",
+      "mergedBy": "mnot",
+      "mergeCommit": {
+        "oid": "c2c60daaecc21ce563ad9a0d28c8aadb36ba3d01"
+      },
+      "comments": [
+        {
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@dret done; see change.\r\n\r\nP.S. GitHub lets you make suggestions using the little +/- icon in the inline comment UX :)",
+          "createdAt": "2021-09-23T01:07:06Z",
+          "updatedAt": "2021-09-23T01:07:06Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOE-NsGs4tJbKg",
@@ -2496,6 +2513,39 @@
               "updatedAt": "2021-09-23T01:06:23Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4tZwE8",
+          "commit": {
+            "abbreviatedOid": "c8df441"
+          },
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-23T08:27:33Z",
+          "updatedAt": "2021-09-23T08:27:34Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "this is a really neat feature! thanks for pointing me to it! ;-)",
+              "createdAt": "2021-09-23T08:27:34Z",
+              "updatedAt": "2021-09-23T08:27:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4tZw6d",
+          "commit": {
+            "abbreviatedOid": "c8df441"
+          },
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-23T08:30:52Z",
+          "updatedAt": "2021-09-23T08:30:52Z",
+          "comments": []
         }
       ]
     }
