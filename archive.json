@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-26T01:04:32.396708+00:00",
+  "timestamp": "2021-09-30T01:08:33.423685+00:00",
   "repo": "ietf-wg-httpapi/rfc7807bis",
   "labels": [
     {
@@ -567,7 +567,7 @@
       "labels": [],
       "body": "In HydraCG/Specifications#178 we have been working on making the response in the case of an API error compatible with RFC 7807. Since Hydra is based on JSON-LD, and RFC 7807 does not provide an official JSON-LD Context, we have had to define the term (property) `status` of RFC 7807 in the scope and namespace of Hydra.\r\n\r\nI believe the use of RFC 7807 and JSON-LD in combination is a Venn diagram with a larger overlap than the one provided by Hydra and thus believe the community would be best served if RFC 7807bis provided its own JSON-LD Context. [Hydra's JSON-LD Context for RFC 7807](https://github.com/HydraCG/Specifications/blob/master/spec/latest/core/error.jsonld) looks like the following:\r\n\r\n```json\r\n{\r\n  \"@context\": {\r\n    \"rdf\": \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\",\r\n    \"rdfs\": \"http://www.w3.org/2000/01/rdf-schema#\",\r\n    \"hydra\": \"http://www.w3.org/ns/hydra/core#\",\r\n    \"type\": { \"@id\": \"rdf:type\", \"@type\": \"@id\" },\r\n    \"title\": \"rdfs:label\",\r\n    \"detail\": \"rdfs:comment\",\r\n    \"status\": \"hydra:statusCode\",\r\n    \"instance\": { \"@id\": \"rdfs:seeAlso\", \"@type\": \"@id\" }\r\n  }\r\n}\r\n```",
       "createdAt": "2021-02-01T10:27:59Z",
-      "updatedAt": "2021-07-15T19:23:55Z",
+      "updatedAt": "2021-09-29T13:57:42Z",
       "closedAt": null,
       "comments": [
         {
@@ -639,6 +639,34 @@
           "body": "just for reference, for linkset we had the same request of providing an \nJSON-LD context. we decided to keep the spec a JSON spec and not go out \non a limb and mandate an RDF model. but we did listen to the input \nregarding the JSON design (we have no options for this here) and decided \nto create an appendix with an informational context:\n\nhttps://datatracker.ietf.org/doc/html/draft-ietf-httpapi-linkset#appendix-A\n",
           "createdAt": "2021-07-15T19:23:55Z",
           "updatedAt": "2021-07-15T19:23:55Z"
+        },
+        {
+          "author": "sazzer",
+          "authorAssociation": "NONE",
+          "body": "This topic has just come up on httpapis.slack.com.\r\n\r\nOne other benefit of adding a JSON-LD context - which may or may not have already been mentioned, apologies if it has! - is that it means that all non-core properties can be defined in their own namespace and never clash with the core ones. That means adding new core properties is suddenly *not* a breaking change.\r\n\r\nFor example:\r\n```\r\n{\r\n\t\"@context\": [\r\n\t\t\"http://www.w3.org/ns/hydra/error\",\r\n\t\t{\r\n\t\t\t\"balance\": \"http://example.com/problem/balance\",\r\n\t\t\t\"accounts\": \"http://example.com/problem/accounts\"\r\n\t\t}\r\n\t],\r\n\t\"type\": \"https://example.com/probs/out-of-credit\",\r\n\t\"title\": \"You do not have enough credit.\",\r\n\t\"detail\": \"Your current balance is 30, but that costs 50.\",\r\n\t\"instance\": \"/account/12345/msgs/abc\",\r\n\t\"balance\": 30,\r\n\t\"accounts\": [\"/account/12345\",\r\n\t\t\"/account/67890\"\r\n\t]\r\n}\r\n```\r\n\r\nMeans that the `balance` and `accounts` keys are defined in a different namespace to the others. Accordingly, if the core spec ever added `accounts` as a key (for some reason) then it's *different* to the one in this document and thus doesn't collide.\r\n\r\nIt also means that the core names are able to be used in a non-core namespace without collision. Eg I might want a `status` property that is *not* the RFC7807 status property.",
+          "createdAt": "2021-09-28T15:59:13Z",
+          "updatedAt": "2021-09-28T15:59:13Z"
+        },
+        {
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On 2021-09-28 17:59, Graham Cox wrote:\n> One other benefit of adding a JSON-LD context - which may or may not \n> have already been mentioned, apologies if it has! - is that it means \n> that all non-core properties can be defined in their own namespace and \n> never clash with the core ones. That means adding new core properties is \n> suddenly /not/ a breaking change.\n> It also means that the core names are able to be used in a non-core \n> namespace without collision. Eg I might want a |status| property that is \n> /not/ the RFC7807 status property.\n\nthat's only true for the mapped model, but it's not true for the JSON \nmodel defined by RFC 7807. this means we will have to stick with the way \nhow it works.\n",
+          "createdAt": "2021-09-28T16:06:22Z",
+          "updatedAt": "2021-09-28T16:06:22Z"
+        },
+        {
+          "author": "asbjornu",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "If we rewrite @sazzer's example a bit, it should be more compatible with non-JSON-LD-capable clients by explicitly adding a namespace prefix:\r\n\r\n```json\r\n{\r\n    \"@context\": [\r\n        \"http://www.w3.org/ns/hydra/error\",\r\n        { \"ex\": \"http://example.com/problem#\" }\r\n    ],\r\n    \"type\": \"https://example.com/probs/out-of-credit\",\r\n    \"title\": \"You do not have enough credit.\",\r\n    \"detail\": \"Your current balance is 30, but that costs 50.\",\r\n    \"instance\": \"/account/12345/msgs/abc\",\r\n    \"ex:balance\": 30,\r\n    \"ex:accounts\": [\r\n        \"/account/12345\",\r\n        \"/account/67890\"\r\n    ],\r\n    \"ex:status\": \"Married, with children\"\r\n}\r\n```",
+          "createdAt": "2021-09-28T21:05:10Z",
+          "updatedAt": "2021-09-28T21:06:12Z"
+        },
+        {
+          "author": "sazzer",
+          "authorAssociation": "NONE",
+          "body": "I wonder if it's just some wording like: (but written by someone better at this than me!)\r\n\r\n> Any additional properties may conflict with properties added in future versions of the specification. This can be avoided by using globally unique property names such as URIs, or by using a JSON-LD context to ensure mapped properties are unique.",
+          "createdAt": "2021-09-29T13:57:42Z",
+          "updatedAt": "2021-09-29T13:57:42Z"
         }
       ]
     },
