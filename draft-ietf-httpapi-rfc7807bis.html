@@ -11,7 +11,7 @@
 <meta content='
        This document defines a "problem detail" as a way to carry machine-readable details of errors in a HTTP response to avoid the need to define new error response formats for HTTP APIs. 
     ' name="description">
-<meta content="xml2rfc 3.9.1" name="generator">
+<meta content="xml2rfc 3.10.0" name="generator">
 <meta content="status" name="keyword">
 <meta content="HTTP" name="keyword">
 <meta content="error" name="keyword">
@@ -21,7 +21,7 @@
 <meta content="XML" name="keyword">
 <meta content="draft-ietf-httpapi-rfc7807bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.9.1
+  xml2rfc 3.10.0
     Python 3.9.5
     appdirs 1.4.4
     ConfigArgParse 1.3
@@ -1029,7 +1029,7 @@ address div.right {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Nottingham, et al.</td>
-<td class="center">Expires 27 March 2022</td>
+<td class="center">Expires 3 April 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1045,12 +1045,12 @@ address div.right {
 <a href="https://datatracker.ietf.org/doc/html/rfc7807" class="eref">7807</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2021-09-23" class="published">23 September 2021</time>
+<time datetime="2021-09-30" class="published">30 September 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-03-27">27 March 2022</time></dd>
+<dd class="expires"><time datetime="2022-04-03">3 April 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1097,7 +1097,7 @@ address div.right {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 March 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 April 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1125,87 +1125,87 @@ address div.right {
         <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
 <a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
         </h2>
-<nav class="toc"><ul class="ulEmpty toc ulBare compact">
-<li class="ulEmpty toc ulBare compact" id="section-toc.1-1.1">
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.2">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-requirements" class="xref">Requirements</a></p>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.3">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-the-problem-details-json-ob" class="xref">The Problem Details JSON Object</a></p>
-<ul class="ulEmpty toc ulBare compact">
-<li class="ulEmpty toc ulBare compact" id="section-toc.1-1.3.2.1">
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-members-of-a-problem-detail" class="xref">Members of a Problem Details Object</a></p>
-<ul class="ulEmpty toc ulBare compact">
-<li class="ulEmpty toc ulBare compact" id="section-toc.1-1.3.2.1.2.1">
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
                     <p id="section-toc.1-1.3.2.1.2.1.1" class="keepWithNext"><a href="#section-3.1.1" class="xref">3.1.1</a>.  <a href="#name-type" class="xref">"type"</a></p>
 </li>
-                  <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.3.2.1.2.2">
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
                     <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="xref">3.1.2</a>.  <a href="#name-status" class="xref">"status"</a></p>
 </li>
-                  <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.3.2.1.2.3">
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.3">
                     <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="xref">3.1.3</a>.  <a href="#name-title" class="xref">"title"</a></p>
 </li>
-                  <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.3.2.1.2.4">
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.4">
                     <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="xref">3.1.4</a>.  <a href="#name-detail" class="xref">"detail"</a></p>
 </li>
-                  <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.3.2.1.2.5">
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.5">
                     <p id="section-toc.1-1.3.2.1.2.5.1"><a href="#section-3.1.5" class="xref">3.1.5</a>.  <a href="#name-instance" class="xref">"instance"</a></p>
 </li>
                 </ul>
 </li>
-              <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.3.2.2">
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-extension-members" class="xref">Extension Members</a></p>
 </li>
             </ul>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.4">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-defining-new-problem-types" class="xref">Defining New Problem Types</a></p>
-<ul class="ulEmpty toc ulBare compact">
-<li class="ulEmpty toc ulBare compact" id="section-toc.1-1.4.2.1">
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-example" class="xref">Example</a></p>
 </li>
-              <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.4.2.2">
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-registered-problem-types" class="xref">Registered Problem Types</a></p>
-<ul class="ulEmpty toc ulBare compact">
-<li class="ulEmpty toc ulBare compact" id="section-toc.1-1.4.2.2.2.1">
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
                     <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="xref">4.2.1</a>.  <a href="#name-aboutblank" class="xref">about:blank</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.5">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a></p>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.6">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.7">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-references" class="xref">References</a></p>
-<ul class="ulEmpty toc ulBare compact">
-<li class="ulEmpty toc ulBare compact" id="section-toc.1-1.7.2.1">
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
                 <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
 </li>
-              <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.7.2.2">
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.8">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="xref">Appendix A</a>.  <a href="#name-json-schema-for-http-proble" class="xref">JSON Schema for HTTP Problems</a></p>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.9">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
             <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="xref">Appendix B</a>.  <a href="#name-http-problems-and-xml" class="xref">HTTP Problems and XML</a></p>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.10">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
             <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="xref">Appendix C</a>.  <a href="#name-using-problem-details-with-" class="xref">Using Problem Details with Other Formats</a></p>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.11">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
             <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a></p>
 </li>
-          <li class="ulEmpty toc ulBare compact" id="section-toc.1-1.12">
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#appendix-E" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
 </li>
         </ul>
@@ -1246,7 +1246,7 @@ address div.right {
 <p id="section-3-2">When serialized as a JSON document, that format is identified with the "application/problem+json" media type.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">For example, an HTTP response carrying JSON problem details:<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="section-3-4">
-<pre class="sourcecode lang-http-message">
+<pre class="lang-http-message sourcecode">
 HTTP/1.1 403 Forbidden
 Content-Type: application/problem+json
 Content-Language: en
@@ -1265,7 +1265,7 @@ Content-Language: en
 <p id="section-3-5">Here, the out-of-credit problem (identified by its type URI) indicates the reason for the 403 in "title", gives a reference for the specific problem occurrence with "instance", gives occurrence-specific details in "detail", and adds two extensions; "balance" conveys the account's balance, and "accounts" gives links where the account can be topped up.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">The ability to convey problem-specific extensions allows more than one problem to be conveyed. For example:<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div id="section-3-7">
-<pre class="sourcecode lang-http-message">
+<pre class="lang-http-message sourcecode">
 HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json
 Content-Language: en
@@ -1302,7 +1302,7 @@ Content-Language: en
 <p id="section-3.1.1-4">When "type" contains a relative URI, it is resolved relative to the document's base URI, as per <span>[<a href="#RFC3986" class="xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-5" class="relref">Section 5</a></span>. However, using relative URIs can cause confusion, and they might not be handled correctly by all implementations.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-5">For example, if the two resources "https://api.example.org/foo/bar/123" and "https://api.example.org/widget/456" both respond with a "type" equal to the relative URI reference "example-problem", when resolved they will identify different resources ("https://api.example.org/foo/bar/example-problem" and "https://api.example.org/widget/example-problem" respectively). As a result, it is RECOMMENDED that absolute URIs be used in "type" when possible, and that when relative URIs are used, they include the full path (e.g., "/types/123").<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-6">The type URI can also be a non-resolvable URI. For example, the tag URI scheme <span>[<a href="#RFC4151" class="xref">RFC4151</a>]</span> can be used to uniquely identify problem types:<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-3.1.1-7">
+<div class="alignLeft art-text artwork" id="section-3.1.1-7">
 <pre>
 tag:mnot@mnot.net,2021-09-17:OutOfLuck
 </pre><a href="#section-3.1.1-7" class="pilcrow">¶</a>
@@ -1566,7 +1566,8 @@ tag:mnot@mnot.net,2021-09-17:OutOfLuck
       </h2>
 <p id="appendix-A-1">This section presents a non-normative JSON Schema <span>[<a href="#I-D.draft-bhutton-json-schema-00" class="xref">I-D.draft-bhutton-json-schema-00</a>]</span> for HTTP Problem Details. If there is any disagreement between it and the text of the specification, the latter prevails.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <div id="appendix-A-2">
-<pre class="sourcecode lang-json">
+<pre class="lang-json sourcecode">
+# NOTE: '\' line wrapping per RFC 8792
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "A problem object RFC 7807bis",
@@ -1575,26 +1576,34 @@ tag:mnot@mnot.net,2021-09-17:OutOfLuck
     "type": {
       "type": "string",
       "format": "uri-reference",
-      "description": "A URI reference RFC3986 that identifies the problem type."
+      "description": "A URI reference RFC3986 that identifies the \
+problem type."
     },
     "title": {
       "type": "string",
-      "description": "A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see RFC7231, Section 3.4)"
+      "description": "A short, human-readable summary of the \
+problem type. It SHOULD NOT change from occurrence to occurrence \
+of the problem, except for purposes of localization (e.g., using \
+proactive content negotiation; see RFC7231, Section 3.4)"
     },
     "status": {
       "type": "integer",
-      "description": "The HTTP status code (RFC7231, Section 6) generated by the origin server for this occurrence of the problem.",
+      "description": "The HTTP status code (RFC7231, Section 6) \
+generated by the origin server for this occurrence of the problem.",
       "minimum": 100,
       "maximum": 599
     },
     "detail": {
       "type": "string",
-      "description": "A human-readable explanation specific to this occurrence of the problem."
+      "description": "A human-readable explanation specific to \
+this occurrence of the problem."
     },
     "instance": {
       "type": "string",
       "format": "uri-reference",
-      "description": "A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced."
+      "description": "A URI reference that identifies the \
+specific occurrence of the problem. It may or may not yield \
+further information if dereferenced."
     }
   }
 }
@@ -1610,7 +1619,7 @@ tag:mnot@mnot.net,2021-09-17:OutOfLuck
 <p id="appendix-B-1">Some HTTP-based APIs use XML <span>[<a href="#XML" class="xref">XML</a>]</span> as their primary format convention. Such APIs can express problem details using the format defined in this appendix.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2">The RELAX NG schema <span>[<a href="#ISO-19757-2" class="xref">ISO-19757-2</a>]</span> for the XML format is as follows. Keep in mind that this schema is only meant as documentation, and not as a normative schema that captures all constraints of the XML format. Also, it would be possible to use other XML schema languages to define a similar set of constraints (depending on the features of the chosen schema language).<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 <div id="appendix-B-3">
-<pre class="sourcecode lang-relax-ng-compact-syntax">
+<pre class="lang-relax-ng-compact-syntax sourcecode">
    default namespace ns = "urn:ietf:rfc:7807"
 
    start = problem
@@ -1633,7 +1642,7 @@ tag:mnot@mnot.net,2021-09-17:OutOfLuck
 <p id="appendix-B-4">The media type for this format is "application/problem+xml".<a href="#appendix-B-4" class="pilcrow">¶</a></p>
 <p id="appendix-B-5">Extension arrays and objects are serialized into the XML format by considering an element containing a child or children to represent an object, except for elements that contain only child element(s) named 'i', which are considered arrays. For example, the example above appears in XML as follows:<a href="#appendix-B-5" class="pilcrow">¶</a></p>
 <div id="appendix-B-6">
-<pre class="sourcecode lang-http-message">
+<pre class="lang-http-message sourcecode">
 HTTP/1.1 403 Forbidden
 Content-Type: application/problem+xml
 Content-Language: en
@@ -1665,7 +1674,7 @@ Content-Language: en
 <p id="appendix-C-2">Problem details can be embedded in other formats either by encapsulating one of the existing serializations (JSON or XML) into that format or by translating the model of a problem detail (as specified in <a href="#problem-json" class="xref">Section 3</a>) into the format's conventions.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 <p id="appendix-C-3">For example, in HTML, a problem could be embedded by encapsulating JSON in a script tag:<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <div id="appendix-C-4">
-<pre class="sourcecode lang-html">
+<pre class="lang-html sourcecode">
 &lt;script type="application/problem+json"&gt;
   {
    "type": "https://example.com/probs/out-of-credit",
