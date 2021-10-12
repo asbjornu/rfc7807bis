@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-30T01:08:33.423685+00:00",
+  "timestamp": "2021-10-12T01:07:57.995903+00:00",
   "repo": "ietf-wg-httpapi/rfc7807bis",
   "labels": [
     {
@@ -147,12 +147,13 @@
       "author": "mnot",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
+        "mnot",
         "sdatspun2"
       ],
       "labels": [],
       "body": "Sometimes an API will want to report more than one problem in a response. 7807 explains that this can be done in extensions, but does not natively allow multiple problems to be conveyed, because there was concern that doing so would make it too easy to contradict the semantics of the status code.\r\n\r\nSince publication, developers have still wanted a generic solution to this. A few possible directions we could go on:\r\n\r\n0. Do nothing\r\n1. Improve the documentation regarding how to handle multiple problems in extensions\r\n2. Introduce a way to natively convey multiple problems, as long as they share the same status code semantics\r\n3. Something else?",
       "createdAt": "2021-01-28T23:41:07Z",
-      "updatedAt": "2021-09-06T20:24:32Z",
+      "updatedAt": "2021-10-11T04:08:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -567,7 +568,7 @@
       "labels": [],
       "body": "In HydraCG/Specifications#178 we have been working on making the response in the case of an API error compatible with RFC 7807. Since Hydra is based on JSON-LD, and RFC 7807 does not provide an official JSON-LD Context, we have had to define the term (property) `status` of RFC 7807 in the scope and namespace of Hydra.\r\n\r\nI believe the use of RFC 7807 and JSON-LD in combination is a Venn diagram with a larger overlap than the one provided by Hydra and thus believe the community would be best served if RFC 7807bis provided its own JSON-LD Context. [Hydra's JSON-LD Context for RFC 7807](https://github.com/HydraCG/Specifications/blob/master/spec/latest/core/error.jsonld) looks like the following:\r\n\r\n```json\r\n{\r\n  \"@context\": {\r\n    \"rdf\": \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\",\r\n    \"rdfs\": \"http://www.w3.org/2000/01/rdf-schema#\",\r\n    \"hydra\": \"http://www.w3.org/ns/hydra/core#\",\r\n    \"type\": { \"@id\": \"rdf:type\", \"@type\": \"@id\" },\r\n    \"title\": \"rdfs:label\",\r\n    \"detail\": \"rdfs:comment\",\r\n    \"status\": \"hydra:statusCode\",\r\n    \"instance\": { \"@id\": \"rdfs:seeAlso\", \"@type\": \"@id\" }\r\n  }\r\n}\r\n```",
       "createdAt": "2021-02-01T10:27:59Z",
-      "updatedAt": "2021-09-29T13:57:42Z",
+      "updatedAt": "2021-10-11T16:28:29Z",
       "closedAt": null,
       "comments": [
         {
@@ -667,6 +668,41 @@
           "body": "I wonder if it's just some wording like: (but written by someone better at this than me!)\r\n\r\n> Any additional properties may conflict with properties added in future versions of the specification. This can be avoided by using globally unique property names such as URIs, or by using a JSON-LD context to ensure mapped properties are unique.",
           "createdAt": "2021-09-29T13:57:42Z",
           "updatedAt": "2021-09-29T13:57:42Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Any additional properties may conflict with properties added in future versions of the specification. This can be avoided by using globally unique property names such as URIs, or by using a JSON-LD context to ensure mapped properties are unique.\r\n\r\nThat's a pretty big change from the current approach of the spec, which is that additional properties are 'owned' by the type in question, not future versions of the spec. It would require significant changes in already deployed uses, to assure they don't conflict with future extensions.\r\n\r\nAt most, I think we could add a statement that future type-specific properties SHOULD follow some particular pattern to avoid clashes with potential future standard-added properties -- e.g., they should contain a ':', which standard properties presumably never will.\r\n\r\nIf we go down that path, we should still have a transition period (likely a few years) before we actually define any new standard properties, IMO.",
+          "createdAt": "2021-10-11T00:08:32Z",
+          "updatedAt": "2021-10-11T00:08:32Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Also, @asbjornu your example makes me think I don't understand the proposal yet, because it **looks** like an on-the-wire change is required -- the addition of a `@context` member. Is that the case?",
+          "createdAt": "2021-10-11T00:16:38Z",
+          "updatedAt": "2021-10-11T00:16:38Z"
+        },
+        {
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On 2021-10-11 02:16, Mark Nottingham wrote:\n> Also, @asbjornu <https://github.com/asbjornu> your example makes me \n> think I don't understand the proposal yet, because it *looks* like an \n> on-the-wire change is required -- the addition of a ***@***.***| member. \n> Is that the case?\n\ni am curious about this one as well. it used to be the case that JSON-LD \ndid not support \"implicit\" contexts, i.e. you always needed to \nexplicitly reference the context within the JSON structure.\n\ni think i can vaguely remember that there were ideas or plans to change \nthat, but i don't know what happened since then.\n",
+          "createdAt": "2021-10-11T07:00:55Z",
+          "updatedAt": "2021-10-11T07:00:55Z"
+        },
+        {
+          "author": "tpluscode",
+          "authorAssociation": "NONE",
+          "body": "JSON-LD has had this from early days that a context can be referenced using [LINK header](https://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)\r\n\r\nA published using the `ex:` extension would have to link to their own context resource",
+          "createdAt": "2021-10-11T07:57:37Z",
+          "updatedAt": "2021-10-11T07:57:37Z"
+        },
+        {
+          "author": "asbjornu",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yes, as @tpluscode writes, `@context` can be removed from the body and smashed into a `Link` header instead. As long as the linked JSON-LD context provides a mapping for the [compact IRI prefixes](https://www.w3.org/TR/json-ld/#dfn-compact-iri) used in the JSON body (in the example being `ex:`), it should be processable as JSON-LD (and by extension, RDF).",
+          "createdAt": "2021-10-11T16:28:29Z",
+          "updatedAt": "2021-10-11T16:28:29Z"
         }
       ]
     },
@@ -932,7 +968,7 @@
       "labels": [],
       "body": "Capturing @ioggstream's response from email thread with follow up questions. Should Problem Details JSON Object schema have any member indicating that the problem(s) is an error(s) or warning(s)? If yes, which status code(s) could be used in case of warning.\r\n\r\nOn Tue, Jan 19, 2021 at 12:30 AM Roberto Polli <roberto@> wrote:\r\nI would like to find a convergent solution for both Problem and\r\nContent-Warning, eg. see\r\nhttps://github.com/dret/I-D/blob/master/http-warning/draft-cedik-http-warning-02.txt#L295\r\nwhich proposes the use of a list of Problem.json which - imho -\r\nprovide redundant information (eg. `status` should always be the\r\nsame).\r\n\r\nKind regards,\r\nR.\r\n--\r\nRoberto Polli\r\nAPI Expert",
       "createdAt": "2021-02-08T15:11:08Z",
-      "updatedAt": "2021-07-27T22:17:57Z",
+      "updatedAt": "2021-10-11T22:34:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -997,6 +1033,48 @@
           "body": "@SleeplessByte nope :)",
           "createdAt": "2021-07-27T22:17:57Z",
           "updatedAt": "2021-07-27T22:17:57Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Should we define such a format in an appendix of this spec, or punt it down the road? Thoughts?",
+          "createdAt": "2021-10-11T00:14:52Z",
+          "updatedAt": "2021-10-11T00:14:52Z"
+        },
+        {
+          "author": "dret",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On 2021-10-11 02:15, Mark Nottingham wrote:\n> Should we define such a format in an appendix of this spec, or punt it \n> down the road? Thoughts?\n\nhaving worked on a draft for this, there is some work we could use, but \nthen again i'd prefer to see that being part of a spec. but maybe having \nit as an appendix is better than not having anything at all, so i am \nslightly in favor of such an appendix.\n",
+          "createdAt": "2021-10-11T07:26:47Z",
+          "updatedAt": "2021-10-11T07:26:47Z"
+        },
+        {
+          "author": "sdatspun2",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">Should we define such a format in an appendix of this spec, or punt it down the road? Thoughts?\r\n\r\nSince warnings are sent with `200` which is never used to respond with error(s), I am not sure how warnings could be accommodated here. Having said that, I am open to reviewing the text in appendix.\r\n",
+          "createdAt": "2021-10-11T13:40:11Z",
+          "updatedAt": "2021-10-11T13:40:11Z"
+        },
+        {
+          "author": "andrecedik",
+          "authorAssociation": "NONE",
+          "body": "You could combine the warnings with the `Content-Warning` field proposed in the [draft](https://datatracker.ietf.org/doc/draft-cedik-http-warning/) @dret mentioned, thus making it possible to react to its presence although the HTTP status code is 200.",
+          "createdAt": "2021-10-11T18:29:27Z",
+          "updatedAt": "2021-10-11T18:29:27Z"
+        },
+        {
+          "author": "sdatspun2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "can you provide a sample that includes both warnings and errors in the same response? sample would help. looked at the draft which only shows example of warning. thanks.",
+          "createdAt": "2021-10-11T18:38:06Z",
+          "updatedAt": "2021-10-11T18:38:06Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@sdatspun2 see above - the thinking is that we can define a format that you retrieve from the problem type URI to get more information about that problem type -- including things like warning levels.",
+          "createdAt": "2021-10-11T22:34:39Z",
+          "updatedAt": "2021-10-11T22:34:39Z"
         }
       ]
     },
@@ -2574,6 +2652,223 @@
           "createdAt": "2021-09-23T08:30:52Z",
           "updatedAt": "2021-09-23T08:30:52Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDOE-NsGs4tBjuP",
+      "title": "Multiple problems example",
+      "url": "https://github.com/ietf-wg-httpapi/rfc7807bis/pull/30",
+      "state": "OPEN",
+      "author": "sdatspun2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Examples are using `causes` for consistency. Added an example for 207 and multiple problems #6 .",
+      "createdAt": "2021-10-11T15:01:29Z",
+      "updatedAt": "2021-10-11T23:19:04Z",
+      "baseRepository": "ietf-wg-httpapi/rfc7807bis",
+      "baseRefName": "main",
+      "baseRefOid": "9efd9d53f4746ad6c1cfaac45f0fbabd5c7df8db",
+      "headRepository": "sdatspun2/rfc7807bis",
+      "headRefName": "main",
+      "headRefOid": "64fd41bd61b2890bec39404f75be39b7329b09e4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOE-NsGs4uR_3T",
+          "commit": {
+            "abbreviatedOid": "3eb1987"
+          },
+          "author": "asbjornu",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "I quite like the addition of the `207` example, but I question the `instance` values used and changed in this PR.",
+          "createdAt": "2021-10-11T16:21:19Z",
+          "updatedAt": "2021-10-11T16:26:20Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Why the change of `instance` value? I think the value `/account/12345/msgs/abc` better captures the intent of the property than `/amount/value/50` by binding the value to a specific occurrence of an error within a specific account number.",
+              "createdAt": "2021-10-11T16:21:20Z",
+              "updatedAt": "2021-10-11T16:26:20Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "I don't think `/age/-50` gives a good indication of what `instance` is supposed to be used for.",
+              "createdAt": "2021-10-11T16:24:05Z",
+              "updatedAt": "2021-10-11T16:26:20Z"
+            },
+            {
+              "originalPosition": 40,
+              "body": "I don't think `/profile-background-color` gives a good indication of what `instance` is supposed to be used for.",
+              "createdAt": "2021-10-11T16:24:20Z",
+              "updatedAt": "2021-10-11T16:26:20Z"
+            },
+            {
+              "originalPosition": 64,
+              "body": "I don't think `/age/-50` gives a good indication of what `instance` is supposed to be used for.",
+              "createdAt": "2021-10-11T16:24:51Z",
+              "updatedAt": "2021-10-11T16:26:20Z"
+            },
+            {
+              "originalPosition": 71,
+              "body": "I don't think `/profile-background-color/yellow` gives a good indication of what `instance` is supposed to be used for.",
+              "createdAt": "2021-10-11T16:25:08Z",
+              "updatedAt": "2021-10-11T16:26:20Z"
+            },
+            {
+              "originalPosition": 78,
+              "body": "I don't think `/amount/value/50` gives a good indication of what `instance` is supposed to be used for.",
+              "createdAt": "2021-10-11T16:25:23Z",
+              "updatedAt": "2021-10-11T16:26:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4uSLE5",
+          "commit": {
+            "abbreviatedOid": "3eb1987"
+          },
+          "author": "sdatspun2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-11T17:19:29Z",
+          "updatedAt": "2021-10-11T17:19:29Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "For \"Your current balance is 30, but that costs 50.\", instance value /account/12345/msgs/abc did not reflect the problem. ",
+              "createdAt": "2021-10-11T17:19:29Z",
+              "updatedAt": "2021-10-11T17:19:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4uSLRf",
+          "commit": {
+            "abbreviatedOid": "3eb1987"
+          },
+          "author": "sdatspun2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-11T17:20:33Z",
+          "updatedAt": "2021-10-11T17:20:33Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "I am just trying to relate detail with instance. ",
+              "createdAt": "2021-10-11T17:20:33Z",
+              "updatedAt": "2021-10-11T17:20:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4uSw-3",
+          "commit": {
+            "abbreviatedOid": "64fd41b"
+          },
+          "author": "asbjornu",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-11T21:21:07Z",
+          "updatedAt": "2021-10-11T21:21:07Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "But the instance of the problem relates to the context in which the problem occurred, who it occurred for, when, and so on. The type of the problem is reflected in the `type` property and doesn't need repetition in the `instance` property?",
+              "createdAt": "2021-10-11T21:21:07Z",
+              "updatedAt": "2021-10-11T21:21:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4uS2uE",
+          "commit": {
+            "abbreviatedOid": "64fd41b"
+          },
+          "author": "sdatspun2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-11T22:00:00Z",
+          "updatedAt": "2021-10-11T22:00:01Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Ohh, that is how you read it. I read it differently. I am trying to point out the value of \"that\" in \"Your current balance is 30, but **that** costs 50.\" ",
+              "createdAt": "2021-10-11T22:00:00Z",
+              "updatedAt": "2021-10-11T22:00:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4uS4aH",
+          "commit": {
+            "abbreviatedOid": "64fd41b"
+          },
+          "author": "asbjornu",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-11T22:09:22Z",
+          "updatedAt": "2021-10-11T22:09:22Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "I think of the value of `instance` as the URI identifying the very `application/problem+json` document you're currently viewing. It seldom actually is in practice, but I think that's what `instance` semantically conveys. Perhaps a clarification in the spec should be provided to avoid confusion?",
+              "createdAt": "2021-10-11T22:09:22Z",
+              "updatedAt": "2021-10-11T22:09:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4uTHxW",
+          "commit": {
+            "abbreviatedOid": "64fd41b"
+          },
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-11T23:18:20Z",
+          "updatedAt": "2021-10-11T23:18:21Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "+1 to a clarification, if necessary. ",
+              "createdAt": "2021-10-11T23:18:20Z",
+              "updatedAt": "2021-10-11T23:18:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOE-NsGs4uTH1O",
+          "commit": {
+            "abbreviatedOid": "64fd41b"
+          },
+          "author": "mnot",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-11T23:19:04Z",
+          "updatedAt": "2021-10-11T23:19:04Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "`instance` is an identifier for the problem's occurrence, not additional details about the problem.",
+              "createdAt": "2021-10-11T23:19:04Z",
+              "updatedAt": "2021-10-11T23:19:04Z"
+            }
+          ]
         }
       ]
     }
